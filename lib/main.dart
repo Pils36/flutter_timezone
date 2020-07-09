@@ -4,21 +4,18 @@
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flutter',
+void main() => runApp(MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Welcome to Flutter'),
+          title: Text('Hello Adebambo!'),
+          centerTitle: false,
+          backgroundColor: Colors.blue[700],
         ),
         body: Center(
-          child: Text('Hello World'),
+          child: Text('Testing 123...'),
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.audiotrack),
         ),
       ),
-    );
-  }
-}
+    ));
