@@ -12,6 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Clock',
       home: Home(),
+      debugShowCheckedModeBanner: false,
+      theme: new ThemeData(primarySwatch: Colors.blue),
     );
   }
 }
@@ -26,36 +28,16 @@ class _HomeState extends State<Home> {
 
   final tabs = [
     Center(
-      child: Container(
-        margin: const EdgeInsets.all(10.0),
-        color: Colors.blue[300],
-        width: 48.0,
-        height: 48.0,
-      ),
+      child: Text('Home'),
     ),
     Center(
-      child: Container(
-        margin: const EdgeInsets.all(10.0),
-        color: Colors.blue[300],
-        width: 48.0,
-        height: 48.0,
-      ),
+      child: Text('Search'),
     ),
     Center(
-      child: Container(
-        margin: const EdgeInsets.all(10.0),
-        color: Colors.blue[300],
-        width: 48.0,
-        height: 48.0,
-      ),
+      child: Text('Location'),
     ),
     Center(
-      child: Container(
-        margin: const EdgeInsets.all(10.0),
-        color: Colors.blue[300],
-        width: 48.0,
-        height: 48.0,
-      ),
+      child: Text('Settings'),
     ),
   ];
 
@@ -67,7 +49,12 @@ class _HomeState extends State<Home> {
         centerTitle: false,
         backgroundColor: Colors.blue[700],
       ),
-      body: tabs[_currentIndex],
+      body: SafeArea(child: tabs[_currentIndex]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.access_time),
+        backgroundColor: Colors.blue[700],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: [
@@ -95,5 +82,26 @@ class _HomeState extends State<Home> {
         },
       ),
     );
+  }
+}
+
+class DrawCircle extends CustomPainter {
+  Paint _paint;
+
+  DrawCircle() {
+    _paint = Paint()
+      ..color = Colors.blue[700]
+      ..strokeWidth = 10.0
+      ..style = PaintingStyle.fill;
+  }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawCircle(Offset(0.0, 0.0), 40.0, _paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
