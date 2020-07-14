@@ -2,7 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/page_one.dart';
+import 'package:myapp/page_two.dart';
+import 'package:myapp/page_three.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +17,12 @@ class MyApp extends StatelessWidget {
       title: 'Clock',
       home: Home(),
       debugShowCheckedModeBanner: false,
-      theme: new ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      routes: <String, WidgetBuilder>{
+        "/a": (BuildContext context) => new PageOne("Page One"),
+        "/b": (BuildContext context) => new PageTwo("Page Two"),
+        "/c": (BuildContext context) => new PageThree("Page Three"),
+      },
     );
   }
 }
@@ -45,15 +54,52 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Clock'),
+        title: Text('Flutter UI'),
+        elevation: defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
         centerTitle: false,
-        backgroundColor: Colors.blue[700],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text("Adebambo Pils"),
+              accountEmail: Text("pils36@flutter.dev"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Text("A"),
+              ),
+            ),
+            ListTile(
+              title: Text("Page One"),
+              trailing: Icon(Icons.arrow_drop_up),
+              onTap: () => Navigator.of(context).pushNamed("/a"),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Page Two"),
+              trailing: Icon(Icons.arrow_drop_up),
+              onTap: () => Navigator.of(context).pushNamed("/b"),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Page Three"),
+              trailing: Icon(Icons.arrow_drop_up),
+              onTap: () => Navigator.of(context).pushNamed("/c"),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Close"),
+              trailing: Icon(Icons.close),
+              onTap: () => {Navigator.of(context).pop()},
+            ),
+          ],
+        ),
       ),
       body: SafeArea(child: tabs[_currentIndex]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.access_time),
-        backgroundColor: Colors.blue[700],
+        backgroundColor: Colors.deepPurple,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -61,19 +107,19 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
               title: Text('Home'),
-              backgroundColor: Colors.blue[700]),
+              backgroundColor: Colors.deepPurple),
           BottomNavigationBarItem(
               icon: Icon(Icons.search),
               title: Text('Search'),
-              backgroundColor: Colors.blue[700]),
+              backgroundColor: Colors.deepPurple),
           BottomNavigationBarItem(
               icon: Icon(Icons.location_on),
               title: Text('Location'),
-              backgroundColor: Colors.blue[700]),
+              backgroundColor: Colors.deepPurple),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings),
               title: Text('Settings'),
-              backgroundColor: Colors.blue[700]),
+              backgroundColor: Colors.deepPurple),
         ],
         onTap: (index) {
           setState(() {
@@ -82,26 +128,5 @@ class _HomeState extends State<Home> {
         },
       ),
     );
-  }
-}
-
-class DrawCircle extends CustomPainter {
-  Paint _paint;
-
-  DrawCircle() {
-    _paint = Paint()
-      ..color = Colors.blue[700]
-      ..strokeWidth = 10.0
-      ..style = PaintingStyle.fill;
-  }
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawCircle(Offset(0.0, 0.0), 40.0, _paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
   }
 }
