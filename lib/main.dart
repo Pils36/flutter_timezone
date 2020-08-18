@@ -4,6 +4,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:myapp/page_one.dart';
 import 'package:myapp/page_two.dart';
 import 'package:myapp/page_three.dart';
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Clock',
-      home: Home(),
+      title: 'Cuppy Kart',
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.deepPurple),
       routes: <String, WidgetBuilder>{
@@ -23,6 +24,86 @@ class MyApp extends StatelessWidget {
         "/b": (BuildContext context) => new PageTwo("Page Two"),
         "/c": (BuildContext context) => new PageThree("Page Three"),
       },
+    );
+  }
+}
+
+// Run splash screen
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Timer(Duration(seconds: 5), () => Home());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(color: Colors.purpleAccent),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 50.0,
+                        child: Icon(
+                          Icons.shopping_basket,
+                          color: Colors.purple,
+                          size: 50.0,
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(top: 10.0)),
+                      Text(
+                        "Cuppy Kart",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 20.0)),
+                    Text(
+                      "Shopping made Easy!",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -43,10 +124,10 @@ class _HomeState extends State<Home> {
       child: Text('Search'),
     ),
     Center(
-      child: Text('Location'),
+      child: Text('Products'),
     ),
     Center(
-      child: Text('Settings'),
+      child: Text('Profile'),
     ),
   ];
 
@@ -54,7 +135,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter UI'),
+        title: Text('Cuppy Kart'),
         elevation: defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
         centerTitle: false,
       ),
@@ -98,7 +179,7 @@ class _HomeState extends State<Home> {
       body: SafeArea(child: tabs[_currentIndex]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(Icons.access_time),
+        child: Icon(Icons.add_shopping_cart),
         backgroundColor: Colors.deepPurple,
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -113,12 +194,12 @@ class _HomeState extends State<Home> {
               title: Text('Search'),
               backgroundColor: Colors.deepPurple),
           BottomNavigationBarItem(
-              icon: Icon(Icons.location_on),
-              title: Text('Location'),
+              icon: Icon(Icons.card_giftcard),
+              title: Text('Products'),
               backgroundColor: Colors.deepPurple),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              title: Text('Settings'),
+              icon: Icon(Icons.verified_user),
+              title: Text('Profile'),
               backgroundColor: Colors.deepPurple),
         ],
         onTap: (index) {
