@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Cuppy Kart',
-      home: SplashScreen(),
+      home: Home(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.deepPurple),
       routes: <String, WidgetBuilder>{
@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
       child: Text('Home'),
     ),
     Center(
-      child: Text('Search'),
+      child: Text('Shop'),
     ),
     Center(
       child: Text('Products'),
@@ -190,15 +190,15 @@ class _HomeState extends State<Home> {
               title: Text('Home'),
               backgroundColor: Colors.deepPurple),
           BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              title: Text('Search'),
+              icon: Icon(Icons.shopping_basket),
+              title: Text('Shop'),
               backgroundColor: Colors.deepPurple),
           BottomNavigationBarItem(
               icon: Icon(Icons.card_giftcard),
               title: Text('Products'),
               backgroundColor: Colors.deepPurple),
           BottomNavigationBarItem(
-              icon: Icon(Icons.verified_user),
+              icon: Icon(Icons.perm_identity),
               title: Text('Profile'),
               backgroundColor: Colors.deepPurple),
         ],
